@@ -1,9 +1,7 @@
 import React from 'react';
 import { createBrowserRouter } from 'react-router';
 
-import ErrorPage from '../pages/ErrorPage/ErrorPage'
-import ProfilePage from '../pages/ProfilePage/ProfilePage';
-import WorkersPage from '../pages/WorkersPage/WorkersPage';
+import { ErrorPage, WorkersPage, ProfilePage } from '../pages'
 
 const router = createBrowserRouter([
   {

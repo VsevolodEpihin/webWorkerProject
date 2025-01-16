@@ -7,10 +7,11 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
+    clean: true,
   },
   resolve: {
     modules: ['node_modules'],
-    extensions: ['.js', '.jsx', '.ts', '.tsx'],
+    extensions: ['.js', '.jsx', '.ts', '.tsx', '.css'],
   },
   module: {
     rules: [
@@ -20,7 +21,7 @@ module.exports = {
         exclude: /node_modules/,
       },
       {
-        test: /\.module\.(css|scss|sass)$/,
+        test: /\.module\.css$/i,
         use: [
           'style-loader',
           {
@@ -29,8 +30,12 @@ module.exports = {
               modules: true,
             },
           },
-          'sass-loader',
         ],
+      },
+      {
+        test: /\.css$/i,
+        exclude: /\.module\.css$/,
+        use: ['style-loader', 'css-loader'],
       },
     ],
   },
