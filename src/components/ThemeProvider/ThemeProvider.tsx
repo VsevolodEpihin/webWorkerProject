@@ -8,10 +8,10 @@ interface ThemeProviderProps {
   children: ReactNode;
 }
 
-const ThemeProvider = ({ children }: ThemeProviderProps) => {
-  return (
-    <StyledThemeProvider theme={theme}>{children}</StyledThemeProvider>
+const ThemeProvider = ({ children }: ThemeProviderProps) => (
+    <StyledThemeProvider theme={theme}>
+      {children}
+    </StyledThemeProvider>
   )
-}
 
 export default ThemeProvider;

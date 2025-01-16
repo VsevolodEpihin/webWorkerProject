@@ -1,11 +1,8 @@
 import React from 'react';
 import { RouterProvider } from 'react-router-dom';
 
-import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
-import ThemeProvider from './components/ThemeProvider/ThemeProvider';
 import router from './router/router';
-import ProfilePage from './pages/ProfilePage/ProfilePage';
-
+import { ErrorBoundary, ThemeProvider } from './components';
 
 const App = () => {
   return (

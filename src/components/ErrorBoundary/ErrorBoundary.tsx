@@ -31,7 +31,7 @@ export default class ErrorBoundary extends React.Component<Props, State> {
       props: { children, errorComponent },
     } = this;
     if(hasError) {
-      return errorComponent || <ErrorPage message="Что-то пошло не так..."></ErrorPage> 
+      return errorComponent || <ErrorPage message="Что-то пошло не так..." />;
     }
     return children;
   }

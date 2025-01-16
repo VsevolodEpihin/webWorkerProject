@@ -9,9 +9,7 @@ const ProfilePage = () => {
   }
 
   return (
-    <>
       <div onClick={handleClick}>WebWorkers</div>
-    </>
   )
 }
 
