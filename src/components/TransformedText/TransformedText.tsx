@@ -6,9 +6,9 @@ interface TransformedTextProps {
 
 const TransformedText = ({ result }: TransformedTextProps) => (
   <div className="result">
-  <h3>Результат:</h3>
-  <p>{result}</p>
-</div>
+    <h3>Результат:</h3>
+    <p>{result}</p>
+  </div>
 )
 
 export default TransformedText;

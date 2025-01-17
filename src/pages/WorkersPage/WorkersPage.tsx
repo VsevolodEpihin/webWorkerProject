@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { ChangeEvent, useState } from 'react';
 
 import useWebWorker from '../../hooks/useWebWorker';
 import { changeWords } from '../../helpers/changeWords';
@@ -14,13 +14,13 @@ const WorkersPage = () => {
     run(value);
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+  const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setValue(e.target.value);
   };
 
   return (
-    <div className="container">
-      <div className="text">
+    <div className='container'>
+      <div className='text'>
         <textarea
           onChange={handleChange}
           value={value}
@@ -28,8 +28,9 @@ const WorkersPage = () => {
         />
       </div>
       <button
-      onClick={handleClick}
-      className="button">
+        onClick={handleClick}
+        className='buttonText'
+      >
         Заменить текст
       </button>
       {result && <TransformedText result={result} />}
