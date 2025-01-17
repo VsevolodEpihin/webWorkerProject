@@ -8,10 +8,17 @@ import './WorkersPage.css';
 
 const WorkersPage = () => {
   const [value, setValue] = useState('');
-  const { result, run } = useWebWorker(changeWords);
+  const [result, setResult] = useState('');
 
-  const handleClick = () => {
-    run(value);
+  const { run } = useWebWorker(changeWords);
+
+  const handleClick = async () => {
+    try {
+      const transformedText = await run(value);
+      setResult(transformedText);
+    } catch (error) {
+      console.error('Error during text transformation:', error);
+    }
   };
 
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
