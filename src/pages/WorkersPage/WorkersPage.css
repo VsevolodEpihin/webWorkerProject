@@ -3,7 +3,6 @@
   flex-direction: column;
   gap: 16px;
   padding: 16px;
-
 }
 
 .text textarea {
@@ -11,6 +10,7 @@
   height: 100px;
   padding: 8px;
   font-size: 16px;
+  white-space: pre-line;
 }
 
 .buttonText {
@@ -31,21 +31,4 @@
 
 .workerContainer {
   display: flex;
-}
-
-.movingBlock {
-  width: 100px;
-  height: 100px;
-  background-color: #3498db;
-  margin-bottom: 20px;
-  animation: moveBlock 2s infinite alternate;
-}
-
-@keyframes moveBlock {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(200px);
-  }
 }

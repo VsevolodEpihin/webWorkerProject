@@ -50,7 +50,9 @@ const WorkersPage = () => {
       >
         Заменить текст
       </button>
-      {workerResult && <TransformedText result={workerResult} />}
+     <pre>
+     {workerResult && <TransformedText result={workerResult} />}
+     </pre>
     </div>
   );
 };
