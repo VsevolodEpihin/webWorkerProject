@@ -45,3 +45,4 @@ const useWebWorker = (handler: WorkerHandler) => {
 };
 
 export default useWebWorker;
+
