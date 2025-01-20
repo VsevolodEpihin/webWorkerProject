@@ -1,10 +1,15 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 
-type WorkerHandler = (text: string) => void;
+type WorkerHandler = (text: string) => string;
 
 const useWebWorker = (handler: WorkerHandler) => {
-  const [result, setResult] = useState<string | null>(null);
+  const [workerResult, setWorkerResult] = useState<string | null>(null);
   const workerRef = useRef<Worker | null>(null);
+
+  const runSync = useCallback((value: string) => {
+    const result = handler(value);
+    setWorkerResult(result);
+  }, [handler]);
 
   useEffect(() => {
     const workerCode = `
@@ -22,16 +27,20 @@ const useWebWorker = (handler: WorkerHandler) => {
     };
   }, [handler]);
 
-  const run = useCallback((value: string) => {
-    if (workerRef.current) {
-      workerRef.current.onmessage = (e) => {
-        setResult(e.data);
-      };
-      workerRef.current.postMessage(value);
+  const run = useCallback((value: string, useWorker: boolean = true) => {
+    if (useWorker) {
+      if (workerRef.current) {
+        workerRef.current.onmessage = (e) => {
+          setWorkerResult(e.data);
+        };
+        workerRef.current.postMessage(value);
+      }
+    } else {
+      runSync(value);
     }
   }, []);
 
-  return { result, run };
+  return { workerResult, run };
 };
 
 export default useWebWorker;

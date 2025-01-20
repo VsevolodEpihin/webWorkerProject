@@ -8,15 +8,25 @@ import './WorkersPage.css';
 
 const WorkersPage = () => {
   const [value, setValue] = useState('');
-  const { result, run } = useWebWorker(changeWords);
+  const [enableWorker, setEnableWorker] = useState(false);
+  
+  const { workerResult, run } = useWebWorker(changeWords);
 
-  const handleClick = () => {
-    run(value);
+  const handleClickWithWorker = () => {
+    if (enableWorker) {
+      run(value);
+    } else {
+      run(value, false);
+    }
   };
 
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setValue(e.target.value);
   };
+
+  const handleChangeType = () => {
+    setEnableWorker(prev => !prev);
+  }
 
   return (
     <div className='container'>
@@ -27,13 +37,20 @@ const WorkersPage = () => {
           placeholder="Введите текст"
         />
       </div>
+      <div className='workerContainer'>
+        <p>Использовать воркеры?</p>
+        <input
+          onChange={handleChangeType}
+          type="checkbox"
+        />
+      </div>
       <button
-        onClick={handleClick}
+        onClick={handleClickWithWorker}
         className='buttonText'
       >
         Заменить текст
       </button>
-      {result && <TransformedText result={result} />}
+      {workerResult && <TransformedText result={workerResult} />}
     </div>
   );
 };
