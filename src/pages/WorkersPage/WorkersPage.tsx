@@ -8,7 +8,6 @@ import './WorkersPage.css';
 
 const WorkersPage = () => {
   const [value, setValue] = useState('');
-  const [result, setResult] = useState('');
   const [enableWorker, setEnableWorker] = useState(false);
   
   const { workerResult, run } = useWebWorker(changeWords);
