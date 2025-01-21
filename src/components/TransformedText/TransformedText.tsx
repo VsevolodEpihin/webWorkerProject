@@ -1,7 +1,7 @@
 import React from 'react';
 
 interface TransformedTextProps {
-  result: string
+  result: string;
 }
 
 const TransformedText = ({ result }: TransformedTextProps) => (

@@ -1,22 +1,36 @@
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 
 import useWebWorker from '../../hooks/useWebWorker';
-import { changeWords } from '../../helpers/changeWords';
-import TransformedText from '../../components/TransformedText/TransformedText';
+import { Replacement, changeWords } from '../../helpers/changeWords';
+import { RemakeContainer, TransformedText } from '../../components';
 
 import './WorkersPage.css';
 
 const WorkersPage = () => {
   const [value, setValue] = useState('');
   const [enableWorker, setEnableWorker] = useState(false);
-  
-  const { workerResult, run } = useWebWorker(changeWords);
+  const [replacements, setReplacements] = useState<Replacement[]>([])
+  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+
+  const { workerResult, run } = useWebWorker((text: string) => {
+    return changeWords(text, replacements);
+  });
+
+  useEffect(() => {
+    const hasInvalidFields = replacements.some(
+      (replacement) =>
+        !replacement.word.trim() ||
+        replacement.synonyms.length === 0 ||
+        replacement.synonyms.some((synonym) => !synonym.trim())
+    );
+    setIsButtonDisabled(!value.trim() || hasInvalidFields);
+  }, [value, replacements]);
 
   const handleClickWithWorker = () => {
     if (enableWorker) {
-      run(value);
+      run(value, replacements);
     } else {
-      run(value, false);
+      run(value, replacements, false);
     }
   };
 
@@ -44,9 +58,11 @@ const WorkersPage = () => {
           type="checkbox"
         />
       </div>
+      <RemakeContainer onReplacementsChange={setReplacements}/>
       <button
         onClick={handleClickWithWorker}
         className='buttonText'
+        disabled={isButtonDisabled}
       >
         Заменить текст
       </button>

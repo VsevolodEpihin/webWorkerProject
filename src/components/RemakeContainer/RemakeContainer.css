@@ -1,0 +1,13 @@
+.replaceContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.optionsContainer {
+  display: flex;
+}
+
+.remakeContainer {
+  display: flex;
+  flex-direction: column;
+}
