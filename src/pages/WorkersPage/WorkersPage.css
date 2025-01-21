@@ -32,3 +32,12 @@
 .workerContainer {
   display: flex;
 }
+
+.remakeContainer {
+  display: flex;
+  align-items: center;
+}
+
+.remakeContainer button {
+  cursor: pointer;
+}

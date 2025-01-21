@@ -1,22 +1,25 @@
 import React, { ChangeEvent, useState } from 'react';
 
 import useWebWorker from '../../hooks/useWebWorker';
-import { changeWords } from '../../helpers/changeWords';
-import TransformedText from '../../components/TransformedText/TransformedText';
+import { Replacement, changeWords } from '../../helpers/changeWords';
+import { RemakeContainer, TransformedText } from '../../components';
 
 import './WorkersPage.css';
 
 const WorkersPage = () => {
   const [value, setValue] = useState('');
   const [enableWorker, setEnableWorker] = useState(false);
-  
-  const { workerResult, run } = useWebWorker(changeWords);
+  const [replacements, setReplacements] = useState<Replacement[]>([])
+
+  const { workerResult, run } = useWebWorker((text: string) => {
+    return changeWords(text, replacements);
+  });
 
   const handleClickWithWorker = () => {
     if (enableWorker) {
-      run(value);
+      run(value, replacements);
     } else {
-      run(value, false);
+      run(value, replacements, false);
     }
   };
 
@@ -44,6 +47,7 @@ const WorkersPage = () => {
           type="checkbox"
         />
       </div>
+      <RemakeContainer onReplacementsChange={setReplacements}/>
       <button
         onClick={handleClickWithWorker}
         className='buttonText'

@@ -1,0 +1,36 @@
+.replaceFieldContainer {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  margin: 10px 0;
+  padding: 10px;
+  border: 1px solid #007BFF;
+  border-radius: 8px;
+  background-color: #E7F3FF;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 25px;
+}
+
+.inputField {
+  padding: 10px;
+  margin: 5px 0;
+  border: 1px solid #007BFF;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.inputField:focus {
+  border-color: #0056b3;
+  outline: none;
+}
+
+.fieldBtn {
+  position: absolute;
+  border: none;
+  background-color: transparent;
+  color: red;
+  cursor: pointer;
+  font-size: 24px;
+  top: 0;
+  right: 0;
+}
