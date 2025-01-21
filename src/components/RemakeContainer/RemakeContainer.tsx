@@ -2,15 +2,16 @@ import React, { useState } from 'react';
 
 import ReplacementField from '../ReplacementField/ReplacementField';
 import { Replacement } from '../../helpers/changeWords';
+import { getId } from '../../helpers/getId';
 
 interface InputField {
-  id: number;
+  id: string;
   word: string;
   synonyms: string[];
 };
 
 interface RemakeContainerProps {
-  onReplacementsChange: React.Dispatch<React.SetStateAction<Replacement[]>>;
+  onReplacementsChange: (value: Replacement[]) => void;
 };
 
 const RemakeContainer = ({ onReplacementsChange }: RemakeContainerProps) => {
@@ -19,19 +20,19 @@ const RemakeContainer = ({ onReplacementsChange }: RemakeContainerProps) => {
   const handleAddInput = () => {
     const newInputs = [
       ...inputs,
-      { id: inputs.length + 1, word: '', synonyms: [] },
+      { id: getId(), word: '', synonyms: [] },
     ];
     setInputs(newInputs);
     onReplacementsChange(newInputs);
   };
 
-  const handleRemoveInput = (id: number) => {
+  const handleRemoveInput = (id: string) => {
     const updatedInputs = inputs.filter(input => input.id !== id);
     setInputs(updatedInputs);
     onReplacementsChange(updatedInputs);
 };
 
-  const handleInputChange = (id: number, field: keyof InputField, value: string[] | string) => {
+  const handleInputChange = (id: string, field: keyof InputField, value: string[] | string) => {
     const updatedInputs = inputs.map((input) =>
       input.id === id ? { ...input, [field]: value } : input
     );

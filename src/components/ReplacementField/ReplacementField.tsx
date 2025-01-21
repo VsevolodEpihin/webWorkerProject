@@ -6,11 +6,11 @@ import { ReplacementField } from '../../types';
 import './ReplacementField.css';
 
 interface ReplacementFieldProps {
-  id: number;
+  id: string;
   word: string;
   synonyms: string[];
-  onInputChange: (id: number, field: ReplacementField, value: string[] | string) => void;
-  onRemove: (id: number) => void;
+  onInputChange: (id: string, field: ReplacementField, value: string[] | string) => void;
+  onRemove: (id: string) => void;
 }
 
 const ReplacementField: React.FC<ReplacementFieldProps> = ({
@@ -25,7 +25,11 @@ const ReplacementField: React.FC<ReplacementFieldProps> = ({
   };
 
   const handleChangeSynonyms = (e: ChangeEvent<HTMLInputElement>) => {
-    const result = e.target.value.split(',')
+    console.log(e.target.value)
+    const result = e.target.value
+    .split(',')
+    .map(synonym => synonym.trim())
+    .filter(synonym => synonym !== '');
     onInputChange(id, SYNONYMS, result);
   };
 
