@@ -33,6 +33,8 @@ const RemakeContainer = ({ onReplacementsChange }: RemakeContainerProps) => {
 };
 
   const handleInputChange = (id: string, field: keyof InputField, value: string[] | string) => {
+    
+
     const updatedInputs = inputs.map((input) =>
       input.id === id ? { ...input, [field]: value } : input
     );

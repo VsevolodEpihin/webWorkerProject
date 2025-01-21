@@ -25,12 +25,11 @@ const ReplacementField: React.FC<ReplacementFieldProps> = ({
   };
 
   const handleChangeSynonyms = (e: ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.value)
-    const result = e.target.value
-    .split(',')
-    .map(synonym => synonym.trim())
-    .filter(synonym => synonym !== '');
-    onInputChange(id, SYNONYMS, result);
+    if(!e.target.value.startsWith(',')) {
+      console.log(1)
+      const result = e.target.value.split(',')
+      onInputChange(id, SYNONYMS, result);
+    }
   };
 
   const handleClick = () => {

@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 
 import useWebWorker from '../../hooks/useWebWorker';
 import { Replacement, changeWords } from '../../helpers/changeWords';
@@ -10,10 +10,21 @@ const WorkersPage = () => {
   const [value, setValue] = useState('');
   const [enableWorker, setEnableWorker] = useState(false);
   const [replacements, setReplacements] = useState<Replacement[]>([])
+  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
 
   const { workerResult, run } = useWebWorker((text: string) => {
     return changeWords(text, replacements);
   });
+
+  useEffect(() => {
+    const hasInvalidFields = replacements.some(
+      (replacement) =>
+        !replacement.word.trim() ||
+        replacement.synonyms.length === 0 ||
+        replacement.synonyms.some((synonym) => !synonym.trim())
+    );
+    setIsButtonDisabled(!value.trim() || hasInvalidFields);
+  }, [value, replacements]);
 
   const handleClickWithWorker = () => {
     if (enableWorker) {
@@ -51,6 +62,7 @@ const WorkersPage = () => {
       <button
         onClick={handleClickWithWorker}
         className='buttonText'
+        disabled={isButtonDisabled}
       >
         Заменить текст
       </button>
