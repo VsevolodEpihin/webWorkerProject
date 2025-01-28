@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   mode: 'development',
@@ -8,6 +9,7 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
     clean: true,
+    publicPath: '/',
   },
   resolve: {
     modules: ['node_modules'],
@@ -31,13 +33,26 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './src/index.html',
     }),
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: path.resolve(__dirname, 'public/serviceWorker.js'),
+          to: path.resolve(__dirname, 'dist'),
+        },
+      ],
+    }),
   ],
   devServer: {
     static: {
-      directory: path.join(__dirname, 'dist'),
+      directory: path.join(__dirname, './dist')
     },
-    port: 3000,
-    hot: true,
+    compress: true,
     historyApiFallback: true,
+    open: true,
+    hot: true,
+    port: 3000,
+    devMiddleware: {
+      writeToDisk: true,
+    },
   },
 };
