@@ -27,6 +27,7 @@ const ReplacementField: React.FC<ReplacementFieldProps> = ({
 
   const handleChangeSynonyms = (e: ChangeEvent<HTMLInputElement>) => {
     if(!e.target.value.startsWith(',')) {
+
       const result = e.target.value.split(',')
       onInputChange(id, SYNONYMS, result);
     }

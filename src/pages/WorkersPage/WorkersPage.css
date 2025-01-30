@@ -30,3 +30,12 @@
 .remakeContainer button {
   cursor: pointer;
 }
+
+.remakeContainer {
+  display: flex;
+  align-items: center;
+}
+
+.remakeContainer button {
+  cursor: pointer;
+}

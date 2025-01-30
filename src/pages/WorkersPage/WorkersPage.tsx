@@ -2,6 +2,7 @@ import React, { ChangeEvent, useEffect, useState } from 'react';
 
 import useWebWorker from '../../hooks/useWebWorker';
 import { Replacement, changeWords } from '../../helpers/changeWords';
+
 import { validFields } from '../../helpers/validFields';
 import {
   Modal,
@@ -13,6 +14,8 @@ import {
 } from '../../components';
 import { getTextsList, loadText, saveText } from '../../api/api';
 import { TextDto } from '../../types/TextDto';
+
+
 
 import './WorkersPage.css';
 
