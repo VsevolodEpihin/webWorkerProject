@@ -49,7 +49,7 @@ const useWebWorker = (handler: WorkerHandler) => {
     return () => {
       workerRef.current?.terminate();
     };
-  }, [handler]);
+  }, []);
 
   const run = useCallback((value: string, replacements: Replacement[], useWorker: boolean = true) => {
     if (useWorker) {
